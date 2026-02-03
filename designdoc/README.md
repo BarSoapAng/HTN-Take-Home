@@ -87,3 +87,7 @@ This was far from what I envisioned for this site. Here's what I needed to work 
 1. Fix the styling for each of the cards
 2. Allow collapse & expand
 3. Separate by date
+
+Some things I also wanted to optimize were:
+1. Minimize GraphQL re-fetch on reload
+2. Persistent login across reload
