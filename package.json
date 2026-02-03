@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/londrina-solid": "^5.2.7",
+    "@fontsource/patrick-hand": "^5.2.8",
+    "fontsource": "^0.0.1-security",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",

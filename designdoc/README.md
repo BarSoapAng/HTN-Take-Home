@@ -77,3 +77,13 @@ I decided to use React + Tailwind.
     font-size: 1rem;
   }
 ```
+
+# Development
+
+I started by creating a basic skeleton of the site using AI, feeding it my Figma designs as a reference. I was able to get this:
+![alt text](image-5.png)
+
+This was far from what I envisioned for this site. Here's what I needed to work on next:
+1. Fix the styling for each of the cards
+2. Allow collapse & expand
+3. Separate by date
