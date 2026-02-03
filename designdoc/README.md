@@ -42,6 +42,15 @@ I decided to use React + Tailwind.
 
 **Create standard classes for easy Tailwind**
 ```css
+  --white: #FFF6EF;
+  --black: #1C1C1C;
+  --gray-1: #5F5F5F;
+  --gray-2: #A2A298;
+  --blue: #7D97FF;
+  --red: #FFAFAF;
+  --yellow: #FFDB5C;
+  --green: #87EEAE;
+
   .hero-title {
     font-family: "Londrina Solid", sans-serif;
     font-weight: 900;
