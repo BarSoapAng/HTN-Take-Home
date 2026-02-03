@@ -23,16 +23,24 @@ export default function EventList({ events }) {
   };
 
   const eventIds = useMemo(() => new Set(events.map((e) => e.id)), [events]);
+  const eventById = useMemo(() => {
+    const map = new Map();
+    events.forEach((event) => map.set(event.id, event));
+    return map;
+  }, [events]);
 
   return (
-    <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+    <div className="mt-6 grid grid-cols-1 gap-6">
       {events.map((event) => (
         <div key={event.id} ref={(node) => setCardRef(event.id, node)}>
           <EventCard
             event={event}
             onScrollTo={onScrollTo}
             // only show related ids that exist in the current visible list
-            relatedIds={(event.related_events || []).filter((id) => eventIds.has(id))}
+            relatedEvents={(event.related_events || [])
+              .filter((id) => eventIds.has(id))
+              .map((id) => eventById.get(id))
+              .filter(Boolean)}
           />
         </div>
       ))}

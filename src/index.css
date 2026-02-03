@@ -25,6 +25,22 @@
 
 }
 
+.black-text {
+  color: var(--black);
+}
+.gray-text {
+  color: var(--gray-1);
+}
+.light-text {
+  color: var(--gray-2);
+}
+.red-text {
+  color: var(--red);
+}
+.blue-text {
+  color: var(--blue);
+}
+
 .hero-title {
   font-family: "Londrina Solid", sans-serif;
   font-weight: 900;
@@ -38,15 +54,15 @@
 
 .big-text {
   font-family: "Patrick Hand", cursive;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 .normal-text {
   font-family: "Patrick Hand", cursive;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .small-text {
   font-family: "Patrick Hand", cursive;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }

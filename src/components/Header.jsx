@@ -1,6 +1,6 @@
 export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-black/10 bg-[color:var(--white)]/90 backdrop-blur">
+    <header className="top-0 z-40 border-b border-black/10 bg-[color:var(--white)]/90 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4">
         <div className="flex items-center gap-3">
           {/* Placeholder "drawn" asset */}
