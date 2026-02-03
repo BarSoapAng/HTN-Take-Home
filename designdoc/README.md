@@ -34,5 +34,37 @@
     ![alt text](image.png)
 
     Figma prototypes:</br>
-    ![alt text](image-1.png)
+    ![alt text](image-1.png)![alt text](image-2.png)![alt text](image-3.png)![alt text](image-4.png)
 
+# Initial Setup
+
+I decided to use React + Tailwind.
+
+**Create standard classes for easy Tailwind**
+```css
+  .hero-title {
+    font-family: "Londrina Solid", sans-serif;
+    font-weight: 900;
+    font-size: 8rem;
+  }
+
+  .title {
+    font-family: "Londrina Solid", sans-serif;
+    font-size: 3rem;
+  }
+
+  .big-text {
+    font-family: "Patrick Hand", cursive;
+    font-size: 2rem;
+  }
+
+  .normal-text {
+    font-family: "Patrick Hand", cursive;
+    font-size: 1.5rem;
+  }
+
+  .small-text {
+    font-family: "Patrick Hand", cursive;
+    font-size: 1rem;
+  }
+```
