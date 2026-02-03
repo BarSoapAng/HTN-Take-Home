@@ -23,6 +23,8 @@
   --yellow: #FFDB5C;
   --green: #87EEAE;
 
+  color: var(--black);
+
 }
 
 .black-text {
