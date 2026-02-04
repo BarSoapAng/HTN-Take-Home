@@ -155,3 +155,15 @@ Only the hero text really had to be resized. I split it into 3 different sizes:
 
 For all other text, I made them somewhat smaller to decrease clutter on smaller screens. For large screens, I added max-width to the cards. This was the only necessary change since everything was already centered.
 
+## Bonuses
+
+Other fun functionalities I added :)
+
+### Event Type Filtering
+Since the fetch & sorting happens in `App.jsx`, I added a dropdown to also filter events by type in addition to permissions. 
+
+Keeping scalability in mind, the event types in the dropdown are generated dynamically from the data.
+
+![alt text](image-12.png)
+
+I also realized private-only filtering might also be useful, so I implemented that as well.

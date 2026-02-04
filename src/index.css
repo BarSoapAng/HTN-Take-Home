@@ -45,56 +45,39 @@
 
 .title {
   font-family: "Londrina Solid", sans-serif;
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 
 .big-text {
   font-family: "Patrick Hand", cursive;
-  font-size: 1.75rem;
+  font-size: 1.35rem;
 }
 
 .normal-text {
   font-family: "Patrick Hand", cursive;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
 }
 
 .small-text {
   font-family: "Patrick Hand", cursive;
-  font-size: 1.1rem;
+  font-size: 0.98rem;
 }
 
-@media (max-width: 640px) {
-  .title{
-    font-size: 1.75rem;
-  }
-
-  .big-text {
-    font-size: 1.5rem;
-  }
-
-  .normal-text {
-    font-size: 1.2rem;
-  }
-
-  .small-text {
-    font-size: 1rem;
-  }
-}
 
 @media (max-width: 580px) {
   .title {
-    font-size: 1.7rem;
+    font-size: 1.45rem;
   }
 
   .big-text {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .normal-text {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
   .small-text {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
   }
 }

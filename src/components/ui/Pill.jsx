@@ -11,7 +11,7 @@ export default function Pill({ label, tone }) {
   return (
     <span
       className="small-text inline-flex items-center rounded-xl px-3 py-1"
-      style={{ backgroundColor: t.bg, color: "var(--black)" }}
+      style={{ backgroundColor: t.bg, color: "var(--gray-1)" }}
     >
       {label}
     </span>

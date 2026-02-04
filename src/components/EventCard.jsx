@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import Pill from "./Pill.jsx";
+import Pill from "./ui/Pill.jsx";
 import { formatTimeRange } from "../utils/time.js";
+import { formatName, getEventColor } from "../utils/eventInfoProcessing.js";
 
-const colors = {
-  "workshop": "yellow",
-  "activity": "red",
-  "tech talk": "green",
-};
+
 
 function getURL(event, isPrivate) {
   if(isPrivate) {
@@ -33,8 +30,8 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
   const start_time = event.start_time;
   const end_time = event.end_time;
 
-  let type = event.event_type;
-  if (type === "tech_talk") type = "tech talk";
+  const type = formatName(event.event_type);
+  const type_color = getEventColor(event.event_type);
 
   const description = event.description;
   const url = getURL(event, isPrivate);
@@ -42,7 +39,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
   if (isExpanded === false) {
     return (
       <article
-        className="bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
+        className="max-w-2xl bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
       >
         <div className="flex items-start justify-between gap-4">
           <a 
@@ -65,8 +62,8 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
 
       <div className="flex items-start justify-between gap-4">
         <div className="mt-4 mb-5 flex flex-wrap gap-2">
-          <Pill label={type} tone={colors[type]} />
-          {isPrivate && <Pill label="hacker only" tone="netural" />}
+          <Pill label={type} tone={type_color} />
+          {isPrivate && <Pill label="hacker only" tone="neutral" />}
         </div>
 
         <p className='normal-text blue-text hover:cursor-pointer hover:opacity-60 my-auto' onClick={() => setExpanded(true)}>see more...</p>
@@ -93,7 +90,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
 
   return (
     <article
-        className="bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
+        className="max-w-2xl bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-20">
@@ -116,8 +113,8 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
 
       <div className="flex items-start justify-between gap-4">
         <div className="mt-4 mb-5 flex flex-wrap gap-2">
-          <Pill label={type} tone={colors[type]} />
-          {isPrivate && <Pill label="hacker only" tone="netural" />}
+          <Pill label={type} tone={type_color} />
+          {isPrivate && <Pill label="hacker only" tone="neutral" />}
         </div>
 
         <p className='normal-text blue-text hover:cursor-pointer hover:opacity-60 my-auto' onClick={() => setExpanded(false)}>see less...</p>

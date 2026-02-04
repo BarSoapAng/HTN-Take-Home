@@ -8,6 +8,7 @@ import EventList from "./components/EventList";
 import LoginModal from "./components/LoginModal.jsx";
 import LoadingState from "./components/LoadingState.jsx";
 import Footer from "./components/footer.jsx";
+import EventTypeFilter from "./components/EventTypeFilter.jsx";
 
 export default function App() {
   const auth = useAuth();
@@ -15,7 +16,9 @@ export default function App() {
   const [loginOpen, setLoginOpen] = useState(false);
 
   const [events, setEvents] = useState([]);
-  const [status, setStatus] = useState("loading"); // loading | ready | error
+  const [status, setStatus] = useState("loading");
+  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [privateOnly, setPrivateOnly] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -36,6 +39,12 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!auth.isLoggedIn && privateOnly) {
+      setPrivateOnly(false);
+    }
+  }, [auth.isLoggedIn, privateOnly]);
+
   const sortedEvents = useMemo(() => {
     return [...events].sort((a, b) => (a.start_time ?? 0) - (b.start_time ?? 0));
   }, [events]);
@@ -49,6 +58,13 @@ export default function App() {
       return perm === "public";
     });
   }, [sortedEvents, auth.isLoggedIn]);
+
+  const filteredEvents = useMemo(() => {
+    const allowed = selectedTypes.length > 0 ? new Set(selectedTypes) : null;
+    return visibleEvents.filter((event) => {
+      return (!privateOnly || (event.permission ?? "private") === "private") && (!allowed || allowed.has(event.event_type));
+    });
+  }, [visibleEvents, selectedTypes, privateOnly]);
 
   return (
     <div
@@ -64,10 +80,18 @@ export default function App() {
       <main className="mx-auto w-full max-w-6xl px-10 mb-16">
         <Hero />
         <hr className="mt-15 mb-10 mx-[-15px]" />
+        <EventTypeFilter
+          events={visibleEvents}
+          selectedTypes={selectedTypes}
+          onSelectedTypesChange={setSelectedTypes}
+          isLoggedIn={auth.isLoggedIn}
+          privateOnly={privateOnly}
+          onPrivateOnlyChange={setPrivateOnly}
+        />
         {status === "loading" && <LoadingState />}
         {status === "ready" && (
           <EventList
-            events={visibleEvents}
+            events={filteredEvents}
           />
         )}
       </main>
