@@ -61,7 +61,7 @@ export default function App() {
         onLogoutClick={auth.logout}
       />
 
-      <main className="mx-auto w-full max-w-6xl px-4 pb-16">
+      <main className="mx-auto w-full max-w-6xl px-10 mb-16">
         <Hero />
 
         {status === "loading" && <LoadingState />}

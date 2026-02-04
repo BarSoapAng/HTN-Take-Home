@@ -17,15 +17,12 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      // Make sure navbar shows when at top of page
       if (currentScrollY < 10) {
         setIsVisible(true);
       } else {
-        // Show navbar when scrolling up 50px past the threshold
         if (currentScrollY < lastScrollYRef.current) {
           setIsVisible(true);
         }
-        // Hide navbar when scrolling down past the threshold
         else if (currentScrollY > lastScrollYRef.current) {
           setIsVisible(false);
         }
@@ -45,7 +42,7 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
       }`}
     >
       <div
-        className="flex justify-between px-20 py-1 background-blur shadow-sm"
+        className="flex justify-between px-10 py-1 background-blur shadow-sm"
         style={{ backgroundColor: "var(--white)" }}
       >
         <a href="/" onClick={ handleLogoClick } className="flex items-center gap-5">

@@ -68,3 +68,15 @@
   font-family: "Patrick Hand", cursive;
   font-size: 1.1rem;
 }
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 7rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .hero-title {
+    font-size: 5.75rem;
+  }
+}

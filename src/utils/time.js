@@ -1,3 +1,4 @@
+// For time formatting
 export function formatTimeRange(startMs, endMs) {
   const start = new Date(startMs);
   const end = new Date(endMs);
@@ -11,6 +12,7 @@ export function formatTimeRange(startMs, endMs) {
   return `${timeFmt.format(start)} - ${timeFmt.format(end)}`;
 }
 
+// For date formatting
 export function formatDateLabel(ms) {
   const date = new Date(ms);
   const dateFmt = new Intl.DateTimeFormat(undefined, {

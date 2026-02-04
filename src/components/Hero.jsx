@@ -1,25 +1,34 @@
+import ScrollIndicator from "./ui/ScrollIndicator";
+import Scribble from '@assets/scribble.svg';
+import Sparks from '@assets/sparks.svg';
+
 export default function Hero() {
   return (
-    <section className="pt-10 sm:pt-12">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h1 className="hero-title leading-[0.9]">Hackathon</h1>
-          <div className="title">Global Inc.™</div>
-          <p className="normal-text mt-4 max-w-2xl text-[color:var(--gray-1)]">
-            A one-page events board for humans who like schedules. Public events are visible to
-            everyone. Private events unlock after login.
-          </p>
+    <section className="relative min-h-[100dvh]">
+      <div className="relative mx-auto flex min-h-[100dvh] flex-col items-center justify-center text-center">
+        <div className="grid place-items-center">
+          <div className="title text-[color:var(--gray-1)]">Events</div>
+          <div className="title text-[color:var(--gray-1)]">@</div>
+          <h1 className="hero-title text-[color:var(--red)] leading-[0.95]">
+            Hackathon Global
+          </h1>
         </div>
 
-        {/* Placeholder "drawn" asset */}
-        <div
-          className="mt-6 h-28 w-full rounded-3xl border border-black/15 sm:mt-0 sm:h-36 sm:w-72"
-          style={{ backgroundColor: "var(--red)" }}
+        <img 
+          src={Scribble}
+          className="absolute left-[4%] top-[22%] w-[180px] text-[color:var(--green)] opacity-90 sm:left-[-2%] sm:top-[14%] sm:w-[140px]"
           aria-hidden="true"
         />
-      </div>
 
-      <div className="mt-10 border-b border-black/10" />
+        <img 
+          src={Sparks}
+          className="absolute right-[10%] top-[48%] w-[140px] text-[color:var(--green)] opacity-70 sm:right-[4%] sm:top-[56%] sm:w-[110px]"
+          aria-hidden="true"
+        />
+        <div className="absolute bottom-6 left-0 right-0 flex justify-center">
+          <ScrollIndicator />
+        </div>
+      </div>
     </section>
   );
 }
