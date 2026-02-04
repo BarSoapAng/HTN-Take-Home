@@ -1,0 +1,11 @@
+/* shrink each timeslot row (30min by default) */
+.fc .fc-timegrid-slot {
+  height: 2px; /* try 14px–26px */
+}
+
+/* optional: tighten the time labels column */
+.fc .fc-timegrid-axis-cushion,
+.fc .fc-timegrid-slot-label-cushion {
+  font-size: 0.8rem;
+  padding: auto;
+}

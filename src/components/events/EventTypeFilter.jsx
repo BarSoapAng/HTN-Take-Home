@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 
 
-import DropdownMultiSelect from "./ui/DropdownMultiSelect.jsx";
-import { formatName } from "../utils/eventInfoProcessing.js";
+import DropdownMultiSelect from "@ui/DropdownMultiSelect.jsx";
+import { formatName } from "@utils/eventInfoProcessing.js";
 
 export default function EventTypeFilter({
   events = [],

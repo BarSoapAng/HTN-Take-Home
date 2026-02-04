@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import Input from "./ui/Input.jsx";
-import Button from "./ui/Button.jsx";
+import Input from "@ui/Input.jsx";
+import Button from "@ui/Button.jsx";
 
 export default function LoginModal({ open, onClose, onSubmit }) {
   const dialogRef = useRef(null);

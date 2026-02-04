@@ -1,8 +1,8 @@
-import ScrollIndicator from "./ui/ScrollIndicator";
+import ScrollIndicator from "@ui/ScrollIndicator";
 import Scribble from '@assets/scribble.svg';
 import Sparks from '@assets/sparks.svg';
 
-import './css/hero.css';
+import '@componentcss/hero.css';
 
 export default function Hero() {
   return (

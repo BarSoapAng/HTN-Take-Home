@@ -1,63 +1,15 @@
-import { useMemo, useRef, useState } from "react";
+import { Fragment, useMemo } from "react";
 import EventCard from "./EventCard.jsx";
-import { formatDateLabel } from "../utils/time.js";
+import { formatDateLabel } from "@utils/time.js";
 
-import './css/eventList.css';
+import '@componentcss/eventList.css';
 
-export default function EventList({ events }) {
-  const cardRefs = useRef(new Map());
-  const [expandedId, setExpandedId] = useState(null);
-
-  const setCardRef = (id, node) => {
-    if (!id) return;
-    if (node) cardRefs.current.set(id, node);
-    else cardRefs.current.delete(id);
-  };
-
-  const onScrollTo = (id, fromId) => {
-    const node = cardRefs.current.get(id);
-    if (!node) return;
-
-    setExpandedId(null);
-    
-    const runFlash = () => { // Landing animation
-      requestAnimationFrame(() => setExpandedId(id));
-    };
-
-    const toNum = Number(id);
-    const fromNum = Number(fromId); ""
-    const shouldSuppress = canCompareNumber
-      ? toNum < fromNum
-      : String(id).localeCompare(String(fromId)) < 0;
-
-    window.__suppressHeader = shouldSuppress;
-    node.scrollIntoView({ behavior: "smooth", block: "start" });
-
-    let lastY = window.scrollY;
-    let idleFrames = 0;
-    const settle = () => {
-      const currentY = window.scrollY;
-      if (currentY === lastY) {
-        idleFrames += 1;
-      } else {
-        idleFrames = 0;
-        lastY = currentY;
-      }
-
-      if (idleFrames >= 3) {
-        window.__suppressHeader = false;
-        runFlash();
-        return;
-      }
-
-      requestAnimationFrame(settle);
-    };
-
-    requestAnimationFrame(settle);
-    setTimeout(() => {
-      window.__suppressHeader = false;
-    }, 1200);
-  };
+export default function EventList({
+  events,
+  setCardRef,
+  expandedId,
+  onScrollTo,
+}) {
 
   const eventIds = useMemo(() => new Set(events.map((e) => e.id)), [events]);
   const eventById = useMemo(() => {
@@ -84,9 +36,9 @@ export default function EventList({ events }) {
   }, [events]);
 
   return (
-    <div className="list mt-6 flex flex-col">
+    <div className="list mt-6 flex flex-col w-full">
       {groupedEvents.map((group) => (
-        <>
+        <Fragment key={group.key}>
           <div className="title mt-5">{group.label}</div>
           <section key={group.key} className="date-block px-3">
             <div className="date-rail">
@@ -111,7 +63,7 @@ export default function EventList({ events }) {
               ))}
             </div>
           </section>
-        </>
+        </Fragment>
       ))}
     </div>
   );

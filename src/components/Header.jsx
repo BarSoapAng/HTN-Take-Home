@@ -1,7 +1,7 @@
 import { FaLaptopCode } from "react-icons/fa";
 
 import { useState, useEffect, useRef } from "react";
-import Button from "./ui/Button.jsx";
+import Button from "@ui/Button.jsx";
 
 export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
   const [isVisible, setIsVisible] = useState(true);

@@ -167,3 +167,13 @@ Keeping scalability in mind, the event types in the dropdown are generated dynam
 ![alt text](image-12.png)
 
 I also realized private-only filtering might also be useful, so I implemented that as well.
+
+### Event Calendar
+Huge fan of seeing timelines visually displayed on actual calendars to see overlaps, so I knew I had to implement a calendar! Since this is a 2-day hackathon, the default time window was 2 days displayed over 24 hours. I chose to use the [FullCalendar](https://fullcalendar.io/) library to simplify creating this from scratch.
+
+Initial iteration:
+![alt text](image-13.png)
+![alt text](image-14.png)
+![alt text](image-15.png)
+
+Clearly a lot of work to be done on the UI.

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import Pill from "./ui/Pill.jsx";
-import { formatTimeRange } from "../utils/time.js";
-import { formatName, getEventColor } from "../utils/eventInfoProcessing.js";
+import Pill from "@ui/Pill.jsx";
+import { formatTimeRange } from "@utils/time.js";
+import { formatName, getEventColor } from "@utils/eventInfoProcessing.js";
 
 
 

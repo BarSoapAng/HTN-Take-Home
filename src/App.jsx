@@ -4,11 +4,11 @@ import { useAuth } from "./hooks/useAuth.js";
 
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
-import EventList from "./components/EventList";
+import EventSection from "./components/EventSection";
 import LoginModal from "./components/LoginModal.jsx";
 import LoadingState from "./components/LoadingState.jsx";
 import Footer from "./components/footer.jsx";
-import EventTypeFilter from "./components/EventTypeFilter.jsx";
+import EventTypeFilter from "./components/events/EventTypeFilter.jsx";
 
 export default function App() {
   const auth = useAuth();
@@ -77,7 +77,7 @@ export default function App() {
         onLogoutClick={auth.logout}
       />
 
-      <main className="mx-auto w-full max-w-6xl px-10 mb-16">
+      <main className="mx-auto w-full max-w-6xl px-8 mb-16">
         <Hero />
         <hr className="mt-15 mb-10 mx-[-15px]" />
         <EventTypeFilter
@@ -89,11 +89,7 @@ export default function App() {
           onPrivateOnlyChange={setPrivateOnly}
         />
         {status === "loading" && <LoadingState />}
-        {status === "ready" && (
-          <EventList
-            events={filteredEvents}
-          />
-        )}
+        {status === "ready" && <EventSection events={filteredEvents} />}
       </main>
 
       <LoginModal
