@@ -53,19 +53,19 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
         <div className="flex items-center gap-2">
           {isLoggedIn ? (
             <Button
-              className="border border-black/20 px-4 py-2"
-              style={{ backgroundColor: "var(--green)" }}
+              className="px-4 py-1"
+              style={{ backgroundColor: "var(--red)" }}
               onClick={onLogoutClick}
             >
-              Log out
+              Sign Out
             </Button>
           ) : (
             <Button
-              className="border border-black/20 px-4 py-2"
-              style={{ backgroundColor: "var(--blue)" }}
+              className="px-4 py-1"
+              style={{ backgroundColor: "var(--red)" }}
               onClick={onLoginClick}
             >
-              Log in
+              Sign In
             </Button>
           )}
         </div>

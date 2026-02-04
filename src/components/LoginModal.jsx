@@ -116,7 +116,7 @@ export default function LoginModal({ open, onClose, onSubmit }) {
             disabled={!canSubmit}
             type="submit"
           >
-            Login
+            Sign In
           </Button>
         </form>
       </div>
