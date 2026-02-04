@@ -39,12 +39,9 @@ export default function EventCard({ event, onScrollTo, relatedEvents }) {
         className="bg-white rounded-md border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
       >
         <div className="flex items-start justify-between gap-4">
-          <div className="min-w-20">
-            <a href={url} className="big-text truncate hover:underline">{name}</a>
+          <a href={url} className="min-w-0 big-text hover:underline">{name}</a>
 
-          </div>
-
-          <div className="normal-text gray-text mt-2">
+          <div className="normal-text gray-text mt-2 text-nowrap">
             {formatTimeRange(start_time, end_time)}
           </div>
         </div>

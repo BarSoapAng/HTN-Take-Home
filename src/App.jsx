@@ -4,9 +4,10 @@ import { useAuth } from "./hooks/useAuth.js";
 
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
-import EventsSection from "./components/EventsSection.jsx";
+import EventList from "./components/EventList";
 import LoginModal from "./components/LoginModal.jsx";
 import LoadingState from "./components/LoadingState.jsx";
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   const auth = useAuth();
@@ -65,9 +66,8 @@ export default function App() {
 
         {status === "loading" && <LoadingState />}
         {status === "ready" && (
-          <EventsSection
+          <EventList
             events={visibleEvents}
-            isLoggedIn={auth.isLoggedIn}
           />
         )}
       </main>
@@ -77,6 +77,7 @@ export default function App() {
         onClose={() => setLoginOpen(false)}
         onSubmit={(u, p) => auth.login(u, p)}
       />
+      <Footer />
     </div>
   );
 }

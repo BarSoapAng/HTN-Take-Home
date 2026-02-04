@@ -1,0 +1,36 @@
+.date-block {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  column-gap: 20px;
+  align-items: stretch;
+}
+
+.date-rail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -30px;
+  margin-bottom: -15px;
+}
+
+.date-dot {
+  border-radius: 100%;
+  border: 2px solid var(--blue);
+}
+
+.date-line {
+  width: 2px;
+  background: var(--blue);
+  flex: 1;
+}
+
+@media (max-width: 640px) {
+  .date-block {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  .date-rail {
+    visibility: hidden;
+  }
+}

@@ -92,5 +92,8 @@ Some things I also wanted to optimize were:
 1. Minimize GraphQL re-fetch on reload
 2. Persistent login across reload
 
-## Card Styling
+## Event cards!
 ![alt text](image-6.png)
+
+Putting it all together:
+![alt text](image-7.png)

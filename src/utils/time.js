@@ -10,3 +10,14 @@ export function formatTimeRange(startMs, endMs) {
 
   return `${timeFmt.format(start)} - ${timeFmt.format(end)}`;
 }
+
+export function formatDateLabel(ms) {
+  const date = new Date(ms);
+  const dateFmt = new Intl.DateTimeFormat(undefined, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  return dateFmt.format(date);
+}
