@@ -36,7 +36,7 @@ export default function EventList({
   }, [events]);
 
   return (
-    <div className="list mt-6 flex flex-col w-full">
+    <div className="list flex flex-col w-full">
       {groupedEvents.map((group) => (
         <Fragment key={group.key}>
           <div className="title mt-5">{group.label}</div>

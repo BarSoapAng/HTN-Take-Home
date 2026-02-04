@@ -31,6 +31,7 @@ export default function EventCalendar({ events, onScrollTo }) {
 
   const [hoverInfo, setHoverInfo] = useState(null); // { x, y, event }
   const [isPreviewHover, setIsPreviewHover] = useState(false);
+  const [canHover, setCanHover] = useState(true);
 
   const fcEvents = useMemo(() => {
     return (events ?? []).map((e) => {
@@ -63,6 +64,14 @@ export default function EventCalendar({ events, onScrollTo }) {
   }, [events]);
 
   useEffect(() => {
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setCanHover(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
     if (!firstEventDate) return;
     const api = calendarRef.current?.getApi();
     if (!api) return;
@@ -72,8 +81,8 @@ export default function EventCalendar({ events, onScrollTo }) {
 
 
   return (
-    <div className="max-w-xl">
-      <div className="rounded-xl border border-black p-10 bg-white">
+    <div className="max-w-xl mt-9">
+      <div className="calendar rounded-xl border border-black p-6 bg-white">
         <FullCalendar
           ref={calendarRef}
           plugins={[timeGridPlugin, listPlugin, interactionPlugin]}
@@ -87,8 +96,8 @@ export default function EventCalendar({ events, onScrollTo }) {
             },
           }}
           headerToolbar={false}
-          slotMinTime="03:00:00"
-          slotMaxTime="15:00:00"
+          slotMinTime="01:00:00"
+          slotMaxTime="16:00:00"
           nowIndicator={true}
           allDaySlot={false}
           height="auto"
@@ -122,7 +131,7 @@ export default function EventCalendar({ events, onScrollTo }) {
             info.el.style.background = bg;
           }}
           eventMouseEnter={(mouseEnterInfo) => {
-            if (isPreviewHover) return;
+            if (!canHover) return;
             const raw = mouseEnterInfo.event.extendedProps?.raw;
             if (!raw) return;
 
@@ -136,6 +145,7 @@ export default function EventCalendar({ events, onScrollTo }) {
             });
           }}
           eventMouseLeave={(mouseLeaveInfo) => {
+            if (!canHover) return;
             const nextTarget = mouseLeaveInfo.jsEvent?.relatedTarget;
             if (previewRef.current?.contains(nextTarget)) return;
             if (!isPreviewHover) setHoverInfo(null);
@@ -155,7 +165,7 @@ export default function EventCalendar({ events, onScrollTo }) {
           className="fixed z-50 max-w-xs rounded-xl border border-black/10 bg-white shadow-lg p-3"
           style={{
             left: Math.min(hoverInfo.x + 12, window.innerWidth - 340),
-            top: Math.min(hoverInfo.y + 7, window.innerHeight - 180),
+            top: Math.min(hoverInfo.y + 5, window.innerHeight - 130),
           }}
           onMouseEnter={() => {
             setIsPreviewHover(true);
@@ -165,7 +175,7 @@ export default function EventCalendar({ events, onScrollTo }) {
             setHoverInfo(null);
           }}
         >
-          <div className="big-text leading-tight">{hoverInfo.event.name}</div>
+          <div className="normal-text leading-tight">{hoverInfo.event.name}</div>
           <div className="small-text gray-text mt-1">
             {formatTimeRange(hoverInfo.event.start_time, hoverInfo.event.end_time)}
           </div>

@@ -38,7 +38,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
   if (isExpanded === false) {
     return (
       <article
-        className="max-w-2xl bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
+        className="bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
       >
         <div className="flex items-start justify-between gap-4">
           <a 
@@ -89,7 +89,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
 
   return (
     <article
-        className="max-w-2xl bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
+        className="bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-20">

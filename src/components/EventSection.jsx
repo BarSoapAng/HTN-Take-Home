@@ -63,7 +63,7 @@ export default function EventSection({ events }) {
   };
 
   return (
-    <section className="section mt-6 grid grid-cols-[1fr_0.5fr] items-start gap-10">
+    <section className="section mt-8 grid grid-cols-[1fr_0.5fr] items-start gap-10">
       <EventList
         events={events}
         setCardRef={setCardRef}
