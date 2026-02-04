@@ -32,10 +32,10 @@
     Initial sketches:</br>
 
     **Styles:**</br>
-    ![alt text](image.png)
+    ![alt text](pictures/image.png)
 
     Figma prototypes:</br>
-    ![alt text](image-1.png)![alt text](image-2.png)![alt text](image-3.png)![alt text](image-4.png)
+    ![alt text](pictures/image-1.png)![alt text](pictures/image-2.png)![alt text](pictures/image-3.png)![alt text](pictures/image-4.png)
 
 
 I decided to use JS/React & Tailwind CSS for the bulk of the website since it's the most common framework and very easy to use, especially in a time crunch! JS was chosen over TS because it's faster and for the scope of the project, TS is overkill (although if this was a part of a bigger project & development was to continue on it, I would have chosen TS).
@@ -108,7 +108,7 @@ Lastly, documentation. Unfortunately I did not comment most lines of code. Howev
 ```
 
 I started by creating a basic skeleton of the site using AI, feeding it my Figma designs as a reference. I was able to get this:
-![alt text](image-5.png)
+![alt text](pictures/image-5.png)
 
 This was far from what I envisioned for this site. Here's what I needed to work on next:
 1. Fix the styling for each of the cards
@@ -121,24 +121,24 @@ Some things I also wanted to optimize were:
 
 ## Component Development
 ### Event cards!
-![alt text](image-6.png)
+![alt text](pictures/image-6.png)
 
 Putting it all together:
-![alt text](image-7.png)
+![alt text](pictures/image-7.png)
 
 After staring at it for a bit, the round edges became a more appealing idea:
-![alt text](image-10.png)
+![alt text](pictures/image-10.png)
 
 ### Login Page
 
 I started by hardcoding the login credentials and used a "useAuth" hook to validate login status. It started off by being really simple comparison: "does the username & password matching hardcoded values?" The login was a simple button at top right, where it pops up a window on click.
 
-![alt text](image-8.png)
+![alt text](pictures/image-8.png)
 
 I also added error checking & disabled the button if the input is not filled.
 
 ### Hero Page
-![alt text](image-9.png)
+![alt text](pictures/image-9.png)
 
 I wanted something simple and clutter free. Also, I'm a fan of the scroll hinting animations a lot of sites so I implemented that with the bottom arrow using Motion.
 
@@ -178,7 +178,7 @@ Only the hero text really had to be resized. I split it into 3 different sizes:
 }
 ```
 
-![alt text](image-11.png)
+![alt text](pictures/image-11.png)
 
 For all other text, I made them somewhat smaller to decrease clutter on smaller screens. For large screens, I added max-width to the cards. This was the only necessary change since everything was already centered.
 
@@ -205,7 +205,7 @@ Since the fetch & sorting happens in `App.jsx`, I added a dropdown to also filte
 
 Keeping scalability in mind, the event types in the dropdown are generated dynamically from the data.
 
-![alt text](image-12.png)
+![alt text](pictures/image-12.png)
 
 I also realized private-only filtering might also be useful, so I implemented that as well.
 
@@ -215,18 +215,18 @@ Huge fan of seeing timelines visually displayed on actual calendars to see overl
 Something cool I learned while working on this is React Fragments.
 
 Initial iteration:
-![alt text](image-13.png)
-![alt text](image-14.png)
+![alt text](pictures/image-13.png)
+![alt text](pictures/image-14.png)
 
 Clearly a lot of work to be done on the UI.
 
-![alt text](image-16.png)
+![alt text](pictures/image-16.png)
 
 Combined with the event list:
-![alt text](image-17.png)
+![alt text](pictures/image-17.png)
 
 I also wanted the function to export events onto Google & Outlook calendars. Decided to display this in the expanded list view as 2 different buttons:
-![alt text](image-18.png)
+![alt text](pictures/image-18.png)
 
 For the sake of time, the view had to be locked onto just the 2 days unfortunately because most events in the endpoint just happened to be on those 2 days.
-![alt text](image-19.png)
+![alt text](pictures/image-19.png)
