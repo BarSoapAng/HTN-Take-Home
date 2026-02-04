@@ -1,0 +1,35 @@
+.hero-title {
+  font-family: "Londrina Solid", sans-serif;
+  font-weight: 900;
+  font-size: 8rem;
+}
+
+.hero-text {
+  font-family: "Londrina Solid", sans-serif;
+  font-weight: 900;
+  font-size: 5rem;
+}
+
+@media (max-width: 1160px) {
+  .decorators {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 7rem;
+  }
+  .hero-text {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .hero-title {
+    font-size: 5.75rem;
+  }
+  .hero-text {
+    font-size: 3.5rem;
+  }
+}

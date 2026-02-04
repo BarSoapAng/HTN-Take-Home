@@ -43,12 +43,6 @@
   color: var(--blue);
 }
 
-.hero-title {
-  font-family: "Londrina Solid", sans-serif;
-  font-weight: 900;
-  font-size: 8rem;
-}
-
 .title {
   font-family: "Londrina Solid", sans-serif;
   font-size: 2rem;
@@ -70,13 +64,37 @@
 }
 
 @media (max-width: 640px) {
-  .hero-title {
-    font-size: 7rem;
+  .title{
+    font-size: 1.75rem;
+  }
+
+  .big-text {
+    font-size: 1.5rem;
+  }
+
+  .normal-text {
+    font-size: 1.2rem;
+  }
+
+  .small-text {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 580px) {
-  .hero-title {
-    font-size: 5.75rem;
+  .title {
+    font-size: 1.7rem;
+  }
+
+  .big-text {
+    font-size: 1.3rem;
+  }
+
+  .normal-text {
+    font-size: 1.05rem;
+  }
+
+  .small-text {
+    font-size: 0.95rem;
   }
 }

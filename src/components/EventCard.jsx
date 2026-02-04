@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Pill from "./Pill.jsx";
 import { formatTimeRange } from "../utils/time.js";
@@ -17,8 +17,14 @@ function getURL(event, isPrivate) {
   }
 }
 
-export default function EventCard({ event, onScrollTo, relatedEvents }) {
+export default function EventCard({ event, onScrollTo, relatedEvents, forceExpanded }) {
   const [isExpanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (forceExpanded) {
+      setExpanded(true);
+    }
+  }, [forceExpanded]);
 
   const perm = event.permission ?? "private";
   const isPrivate = perm === "private";
@@ -36,7 +42,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents }) {
   if (isExpanded === false) {
     return (
       <article
-        className="bg-white rounded-md border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
+        className="bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
       >
         <div className="flex items-start justify-between gap-4">
           <a 
@@ -87,7 +93,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents }) {
 
   return (
     <article
-        className="bg-white rounded-md border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
+        className="bg-white rounded-xl border border-black px-7 py-5 transition hover:translate-y-[-1px] hover:shadow-md"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-20">
@@ -123,7 +129,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents }) {
         <p className="small-text gray-text">{description}</p>
       )}
 
-      <div className="flex gap-30 mb-1">
+      <div className="flex gap-20 mb-1">
         {Array.isArray(event.speakers) && event.speakers.length > 0 && (
           <div className="mt-4">
             <div className="small-text underline">Speakers</div>
@@ -145,7 +151,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents }) {
                 <button
                   key={related.id}
                   className="small-text blue-text text-left inline-flex items-start w-fit"
-                  onClick={() => onScrollTo(related.id)}
+                  onClick={() => onScrollTo(related.id, event.id)}
                 >
                   <span className="mr-2">•</span>
                   <span className='hover:underline'>{related.name ?? related.id}</span>

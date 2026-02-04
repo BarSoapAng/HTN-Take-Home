@@ -63,7 +63,7 @@ export default function App() {
 
       <main className="mx-auto w-full max-w-6xl px-10 mb-16">
         <Hero />
-
+        <hr className="mt-15 mb-10 mx-[-15px]" />
         {status === "loading" && <LoadingState />}
         {status === "ready" && (
           <EventList

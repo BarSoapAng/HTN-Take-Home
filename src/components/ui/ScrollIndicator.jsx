@@ -13,7 +13,7 @@ export default function ScrollIndicator() {
       }}
       className="will-change-transform"
     >
-      <FaArrowDownLong className="h-10 text-[color:var(--green)]" />
+      <FaArrowDownLong className="h-7 w-7 text-[color:var(--green)]" />
     </motion.div>
   )
 }

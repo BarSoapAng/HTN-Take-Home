@@ -17,6 +17,12 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
+      if (window.__suppressHeader) {
+        setIsVisible(false);
+        lastScrollYRef.current = currentScrollY;
+        return;
+      }
+
       if (currentScrollY < 10) {
         setIsVisible(true);
       } else {

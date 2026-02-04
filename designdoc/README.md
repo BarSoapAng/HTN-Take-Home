@@ -92,16 +92,66 @@ Some things I also wanted to optimize were:
 1. Minimize GraphQL re-fetch on reload
 2. Persistent login across reload
 
-## Event cards!
+## Component Development
+### Event cards!
 ![alt text](image-6.png)
 
 Putting it all together:
 ![alt text](image-7.png)
 
-## Login Page
+After staring at it for a bit, the round edges became a more appealing idea:
+![alt text](image-10.png)
+
+### Login Page
 
 I started by hardcoding the login credentials and used a "useAuth" hook to validate login status. It started off by being really simple comparison: "does the username & password matching hardcoded values?" The login was a simple button at top right, where it pops up a window on click.
 
 ![alt text](image-8.png)
 
 I also added error checking & disabled the button if the input is not filled.
+
+### Hero Page
+![alt text](image-9.png)
+
+I wanted something simple and clutter free. Also, I'm a fan of the scroll hinting animations a lot of sites so I implemented that with the bottom arrow using Motion.
+
+## Problems I Came Across
+
+### Related Events Scrolling
+When clicking on "related events" and scrolling up to them, the header would appear and obstruct the view. I ended up having to suppress the header and adding idle frames when scrolling using the eventCards.
+
+However, this also felt unatrual when scrolling down. It made more sense to hide the header on down scroll and keep it hidden on up scroll. The solution was to use `id` as a comparison for up vs. down scroll and setting idle frames accordingly. 
+
+Initially, the related event would animate a "pop" after arriving. But this looked awkward. Instead, I decided to simply expand the box after landing. This meant passing in an argument into `EventCard.jsx` to forcibly expand it.
+
+### Hero Doodle Placements
+Since the doodles are placed absolutely, it's very hard to get it placed responsively along with the text. I decided to disable it on smaller screens for the time being because it would be a lot of work. There are definitely more important priorities, but it's worth coming back to if given more time...
+
+## Responsiveness
+
+### Text
+Only the hero text really had to be resized. I split it into 3 different sizes:
+```css
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 7rem;
+  }
+  .hero-text {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .hero-title {
+    font-size: 5.75rem;
+  }
+  .hero-text {
+    font-size: 3.5rem;
+  }
+}
+```
+
+![alt text](image-11.png)
+
+For all other text, I made them somewhat smaller to decrease clutter on smaller screens. For large screens, I added max-width to the cards. This was the only necessary change since everything was already centered.
+
