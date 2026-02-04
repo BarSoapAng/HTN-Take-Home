@@ -7,7 +7,7 @@ import Hero from "./components/Hero.jsx";
 import EventSection from "./components/EventSection";
 import LoginModal from "./components/LoginModal.jsx";
 import LoadingState from "./components/LoadingState.jsx";
-import Footer from "./components/footer.jsx";
+import Footer from "./components/Footer.jsx";
 import EventTypeFilter from "./components/events/EventTypeFilter.jsx";
 
 export default function App() {
