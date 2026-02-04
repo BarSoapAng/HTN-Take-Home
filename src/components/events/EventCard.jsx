@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 
 import Pill from "@ui/Pill.jsx";
+import Button from '@ui/Button.jsx';
 import { formatTimeRange } from "@utils/time.js";
-import { formatName, getEventColor } from "@utils/eventInfoProcessing.js";
-
-
+import { formatName, getEventColor, buildGCalUrl, buildOutlookUrl } from "@utils/eventInfoProcessing.js";
 
 function getURL(event, isPrivate) {
   if(isPrivate) {
@@ -63,7 +62,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
       <div className="flex items-start justify-between gap-4">
         <div className="mt-4 mb-5 flex flex-wrap gap-2">
           <Pill label={type} tone={type_color} />
-          {isPrivate && <Pill label="hacker only" tone="neutral" />}
+          {isPrivate && <Pill label="hacker only" tone="neutral"/>}
         </div>
 
         <p className='normal-text blue-text hover:cursor-pointer hover:opacity-60 my-auto' onClick={() => setExpanded(true)}>see more...</p>
@@ -130,7 +129,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
         {Array.isArray(event.speakers) && event.speakers.length > 0 && (
           <div className="mt-4">
             <div className="small-text underline">Speakers</div>
-            <div className="small-text mt-1 gray-text">
+            <div className="small-text mt-1 gray-text text-nowrap">
               {event.speakers.map((s, idx) => (
                 <span key={`${s.name}-${idx}`}>
                   • {s.name}
@@ -157,6 +156,30 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
             </div>
           </div>
         )}
+      </div>
+
+      <div className='flex flex-col gap-2 items-start'>
+        <p className='small-text underline'>Add to Calendar:</p>
+        <div className='flex flex-row gap-3'>
+          <Button
+            className="small-text gray-text hover:underline"
+            href={buildGCalUrl(event)}
+            target="_blank"
+            rel="noreferrer"
+            style={{ backgroundColor: "var(--white)" }}
+          >
+            Google
+          </Button>
+          <Button
+            className="small-text gray-text hover:underline"
+            href={buildGCalUrl(event)}
+            target="_blank"
+            rel="noreferrer"
+            style={{ backgroundColor: "var(--white)" }}
+          >
+            Outlook
+          </Button>
+        </div>
       </div>
     </article>
   );

@@ -9,38 +9,6 @@ import { formatName, getEventColor } from "@utils/eventInfoProcessing.js";
 import '@componentcss/eventCalendar.css';
 
 // --- helpers ---
-function pad2(n) {
-  return String(n).padStart(2, "0");
-}
-
-// Google Calendar "Add" link (UTC)
-function toGCalDate(ms) {
-  const d = new Date(ms);
-  return (
-    d.getUTCFullYear() +
-    pad2(d.getUTCMonth() + 1) +
-    pad2(d.getUTCDate()) +
-    "T" +
-    pad2(d.getUTCHours()) +
-    pad2(d.getUTCMinutes()) +
-    pad2(d.getUTCSeconds()) +
-    "Z"
-  );
-}
-
-function buildGCalUrl(event, ) {
-  const start = toGCalDate(event.start_time);
-  const end = toGCalDate(event.end_time);
-  const text = event.name ?? "Event";
-  const details = event.description ?? "";
-  const url =
-    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-    `&text=${encodeURIComponent(text)}` +
-    `&dates=${encodeURIComponent(`${start}/${end}`)}` +
-    `&details=${encodeURIComponent(details)}`;
-  return url;
-}
-
 function toneToCssVar(tone) {
   if (tone === "yellow") return "var(--yellow)";
   if (tone === "red") return "var(--red)";
@@ -61,7 +29,6 @@ export default function EventCalendar({ events, onScrollTo }) {
   const calendarRef = useRef(null);
 
   const [hoverInfo, setHoverInfo] = useState(null); // { x, y, event }
-  const [detailEvent, setDetailEvent] = useState(null);
 
   const fcEvents = useMemo(() => {
     return (events ?? []).map((e) => {
@@ -187,8 +154,7 @@ export default function EventCalendar({ events, onScrollTo }) {
           eventClick={(clickInfo) => {
             const raw = clickInfo.event.extendedProps?.raw;
             if (!raw) return;
-            // Click opens a real modal with actions
-            setDetailEvent(raw);
+            onScrollTo?.(raw.id, raw.id);
           }}
         />
       </div>
@@ -212,75 +178,6 @@ export default function EventCalendar({ events, onScrollTo }) {
         </div>
       )}
 
-      {/* Detail modal */}
-      {detailEvent && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <button
-            className="absolute inset-0 bg-black/40"
-            onClick={() => setDetailEvent(null)}
-            aria-label="Close"
-          />
-          <div className="relative w-[min(720px,92vw)] rounded-2xl bg-white shadow-xl border border-black/10 p-5">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="title">{detailEvent.name}</div>
-                <div className="normal-text gray-text mt-1">
-                  {formatTimeRange(detailEvent.start_time, detailEvent.end_time)}
-                </div>
-                <div className="small-text light-text mt-1">
-                  {formatName(detailEvent.event_type)}
-                </div>
-              </div>
-
-              <button
-                className="small-text px-3 py-1 rounded-full border border-black/10 hover:underline"
-                onClick={() => setDetailEvent(null)}
-              >
-                Close
-              </button>
-            </div>
-
-            {detailEvent.speakers?.length > 0 && (
-              <div className="mt-4">
-                <div className="small-text underline">Speakers</div>
-                <div className="small-text mt-1">
-                  {detailEvent.speakers.map((s) => s.name).filter(Boolean).join(", ")}
-                </div>
-              </div>
-            )}
-
-            {detailEvent.description && (
-              <div className="mt-4">
-                <div className="small-text underline">Description</div>
-                <p className="small-text mt-1 gray-text whitespace-pre-wrap">
-                  {detailEvent.description}
-                </p>
-              </div>
-            )}
-
-            <div className="mt-5 flex flex-wrap gap-3">
-              <a
-                className="small-text px-4 py-2 rounded-full hover:underline border border-black/10"
-                href={buildGCalUrl(detailEvent)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Add to calendar
-              </a>
-
-              <button
-                className="small-text px-4 py-2 rounded-full hover:underline border border-black/10"
-                onClick={() => {
-                  setDetailEvent(null);
-                  onScrollTo?.(detailEvent.id, detailEvent.id);
-                }}
-              >
-                Jump to details
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
