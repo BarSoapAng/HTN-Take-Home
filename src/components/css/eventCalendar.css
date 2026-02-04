@@ -1,11 +1,54 @@
-/* shrink each timeslot row (30min by default) */
-.fc .fc-timegrid-slot {
-  height: 2px; /* try 14px–26px */
+.fc {
+  font-family: "Patrick Hand", cursive;
 }
 
-/* optional: tighten the time labels column */
-.fc .fc-timegrid-axis-cushion,
+.fc .fc-col-header-cell-cushion {
+  font-size: 1rem;
+  color: var(--black);
+}
+
 .fc .fc-timegrid-slot-label-cushion {
-  font-size: 0.8rem;
-  padding: auto;
+  font-size: 0.75rem;
+  color: var(--gray-2);
+  
+  padding-right: 10px;
+}
+
+.fc .fc-event-title{
+  color: var(--black);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc .fc-event-main {
+  color: var(--gray-1);
+  font-size: 0.78rem;
+}
+
+.fc .fc-event-content-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+/* event pill styling */
+.fc .fc-event {
+  border: 1px solid var(--gray-1);
+  border-radius: 0.25rem;
+  padding: 1px 6px;
+  cursor: pointer;
+}
+
+.fc .fc-timegrid-event .fc-event-main {
+  overflow: hidden;
+}
+
+.fc .fc-event-title,
+.fc .fc-event-time {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

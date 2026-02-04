@@ -169,7 +169,7 @@ Keeping scalability in mind, the event types in the dropdown are generated dynam
 I also realized private-only filtering might also be useful, so I implemented that as well.
 
 ### Event Calendar
-Huge fan of seeing timelines visually displayed on actual calendars to see overlaps, so I knew I had to implement a calendar! Since this is a 2-day hackathon, the default time window was 2 days displayed over 24 hours. I chose to use the [FullCalendar](https://fullcalendar.io/) library to simplify creating this from scratch. The view had to be locked onto just the 2 days unfortunately because the way the data is in the endpoint, there's a huge gap between the 2 days and then the rest of the events.
+Huge fan of seeing timelines visually displayed on actual calendars to see overlaps, so I knew I had to implement a calendar! Since this is a 2-day hackathon, the default time window was 2 days displayed over 24 hours. I chose to use the [FullCalendar](https://fullcalendar.io/) library to simplify creating this from scratch. 
 
 Something cool I learned while working on this is React Fragments.
 
@@ -187,3 +187,5 @@ Combined with the event list:
 I also wanted the function to export events onto Google & Outlook calendars. Decided to display this in the expanded list view as 2 different buttons:
 ![alt text](image-18.png)
 
+For the sake of time, the view had to be locked onto just the 2 days unfortunately because most events in the endpoint just happened to be on those 2 days.
+![alt text](image-19.png)

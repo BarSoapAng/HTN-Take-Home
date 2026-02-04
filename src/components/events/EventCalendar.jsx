@@ -10,10 +10,10 @@ import '@componentcss/eventCalendar.css';
 
 // --- helpers ---
 function toneToCssVar(tone) {
-  if (tone === "yellow") return "var(--yellow)";
-  if (tone === "red") return "var(--red)";
-  if (tone === "green") return "var(--green)";
-  return "var(--gray-2)";
+  if (tone === "yellow") return "#FFF0BA";
+  if (tone === "red") return "#FFDDDD";
+  if (tone === "green") return "#BCF6D2";
+  return "#E0E0DE";
 }
 
 function formatTimeRange(startMs, endMs) {
@@ -27,8 +27,10 @@ function formatTimeRange(startMs, endMs) {
 
 export default function EventCalendar({ events, onScrollTo }) {
   const calendarRef = useRef(null);
+  const previewRef = useRef(null);
 
   const [hoverInfo, setHoverInfo] = useState(null); // { x, y, event }
+  const [isPreviewHover, setIsPreviewHover] = useState(false);
 
   const fcEvents = useMemo(() => {
     return (events ?? []).map((e) => {
@@ -84,27 +86,15 @@ export default function EventCalendar({ events, onScrollTo }) {
               duration: { days: 2 },
             },
           }}
-          headerToolbar={{
-            left: "prev,next today",
-            center: "title",
-            right: "twoDay,timeGridDay,listDay",
-          }}
-          customButtons={{
-            twoDay: {
-              text: "2 day",
-              click: () => calendarRef.current?.getApi().changeView("timeGridTwoDay"),
-            },
-          }}
-          slotMinTime="01:00:00"
-          slotMaxTime="24:00:00"
+          headerToolbar={false}
+          slotMinTime="03:00:00"
+          slotMaxTime="15:00:00"
           nowIndicator={true}
           allDaySlot={false}
-          expandRows={false}
           height="auto"
-          dayHeaderFormat={{ weekday: "short", day: "numeric" }}
+          dayHeaderFormat={{ day: "numeric", weekday: "short"  }}
           slotLabelFormat={{
             hour: "numeric",
-            minute: "2-digit",
             hour12: true,
           }}
           eventTimeFormat={{
@@ -115,41 +105,40 @@ export default function EventCalendar({ events, onScrollTo }) {
           eventOverlap={true}
           events={fcEvents}
           eventDisplay="block"
+          eventContent={(arg) => {
+            return (
+              <div className="fc-event-content-inner">
+                <div className="fc-event-title">{arg.event.title}</div>
+                {arg.timeText && (
+                  <div className="fc-event-time">{arg.timeText}</div>
+                )}
+              </div>
+            );
+          }}
           eventDidMount={(info) => {
-            // Solid pill styling per event
             const tone = info.event.extendedProps?.tone;
             const bg = toneToCssVar(tone);
 
             info.el.style.background = bg;
-            info.el.style.border = "1px solid var(--gray-2)";
-            info.el.style.borderRadius = "0.25rem";
-            info.el.style.padding = "2px 8px";
-            info.el.style.boxShadow = "none";
-            info.el.style.color = "var(--black)";
-            info.el.style.fontFamily = '"Patrick Hand", cursive';
-            info.el.style.fontSize = "0.9rem";
-            info.el.style.cursor = "pointer";
-
-            // make the inner title not wrap into chaos too quickly
-            const titleEl = info.el.querySelector(".fc-event-title");
-            if (titleEl) {
-              titleEl.style.whiteSpace = "nowrap";
-              titleEl.style.overflow = "hidden";
-              titleEl.style.textOverflow = "ellipsis";
-            }
           }}
           eventMouseEnter={(mouseEnterInfo) => {
+            if (isPreviewHover) return;
             const raw = mouseEnterInfo.event.extendedProps?.raw;
             if (!raw) return;
 
-            setHoverInfo({
-              x: mouseEnterInfo.jsEvent.clientX,
-              y: mouseEnterInfo.jsEvent.clientY,
-              event: raw,
+            setHoverInfo((prev) => {
+              if (prev?.event?.id === raw.id) return prev;
+              return {
+                x: mouseEnterInfo.jsEvent.clientX,
+                y: mouseEnterInfo.jsEvent.clientY,
+                event: raw,
+              };
             });
           }}
-          eventMouseLeave={() => {
-            setHoverInfo(null);
+          eventMouseLeave={(mouseLeaveInfo) => {
+            const nextTarget = mouseLeaveInfo.jsEvent?.relatedTarget;
+            if (previewRef.current?.contains(nextTarget)) return;
+            if (!isPreviewHover) setHoverInfo(null);
           }}
           eventClick={(clickInfo) => {
             const raw = clickInfo.event.extendedProps?.raw;
@@ -162,10 +151,18 @@ export default function EventCalendar({ events, onScrollTo }) {
       {/* Hover preview popover */}
       {hoverInfo?.event && (
         <div
+          ref={previewRef}
           className="fixed z-50 max-w-xs rounded-xl border border-black/10 bg-white shadow-lg p-3"
           style={{
             left: Math.min(hoverInfo.x + 12, window.innerWidth - 340),
-            top: Math.min(hoverInfo.y + 12, window.innerHeight - 180),
+            top: Math.min(hoverInfo.y + 7, window.innerHeight - 180),
+          }}
+          onMouseEnter={() => {
+            setIsPreviewHover(true);
+          }}
+          onMouseLeave={() => {
+            setIsPreviewHover(false);
+            setHoverInfo(null);
           }}
         >
           <div className="big-text leading-tight">{hoverInfo.event.name}</div>
