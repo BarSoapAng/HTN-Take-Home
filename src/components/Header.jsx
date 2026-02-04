@@ -51,8 +51,8 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
         className="flex justify-between px-10 py-1 background-blur shadow-sm"
         style={{ backgroundColor: "var(--white)" }}
       >
-        <a href="/" onClick={ handleLogoClick } className="flex items-center gap-5">
-          <FaLaptopCode className="w-6 h-6"/>
+        <a href="#top" onClick={ handleLogoClick } className="flex items-center gap-5">
+          <FaLaptopCode className="w-6 h-6" aria-hidden="true" />
           <div className="title">Events</div>
         </a>
 

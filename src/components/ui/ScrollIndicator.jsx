@@ -12,6 +12,7 @@ export default function ScrollIndicator() {
         repeat: Infinity,
       }}
       className="will-change-transform"
+      aria-hidden="true"
     >
       <FaArrowDownLong className="h-7 w-7 text-[color:var(--green)]" />
     </motion.div>

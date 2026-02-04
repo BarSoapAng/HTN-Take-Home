@@ -68,16 +68,19 @@ export default function App() {
 
   return (
     <div
+      id="top"
       className="min-h-screen"
       style={{ backgroundColor: "var(--white)", color: "var(--black)" }}
     >
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+
       <Header
         isLoggedIn={auth.isLoggedIn}
         onLoginClick={() => setLoginOpen(true)}
         onLogoutClick={auth.logout}
       />
 
-      <main className="mx-auto w-full max-w-6xl px-8 mb-16">
+      <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-6xl px-8 mb-16">
         <Hero />
         <hr className="mt-15 mb-10 mx-[-15px]" />
         <EventTypeFilter

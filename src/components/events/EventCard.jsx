@@ -172,7 +172,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
           </Button>
           <Button
             className="small-text gray-text hover:underline"
-            href={buildGCalUrl(event)}
+            href={buildOutlookUrl(event)}
             target="_blank"
             rel="noreferrer"
             style={{ backgroundColor: "var(--white)" }}

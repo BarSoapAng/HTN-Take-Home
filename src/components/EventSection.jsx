@@ -49,6 +49,9 @@ export default function EventSection({ events }) {
 
       if (idleFrames >= 3) {
         window.__suppressHeader = false;
+        if (typeof node.focus === "function") {
+          node.focus({ preventScroll: true });
+        }
         runFlash();
         return;
       }
@@ -63,7 +66,7 @@ export default function EventSection({ events }) {
   };
 
   return (
-    <section className="section mt-8 grid grid-cols-[1fr_0.5fr] items-start gap-10">
+    <section className="section mt-10 grid grid-cols-[1fr_0.5fr] items-start gap-10">
       <EventList
         events={events}
         setCardRef={setCardRef}

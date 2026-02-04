@@ -1,4 +1,6 @@
-# Pre-development
+# HTN Writeup Questions
+
+## 1.
 
 1. Started by stating out requirements for the UI:
     - Login
@@ -15,7 +17,6 @@
       - by time
       - Bonus: search for name
       - Bonus: by event type
-      - Bonus: event reordering, persist across refresh
 2. Research existing solutions:
     - Luma (very cutesy, modular, notion vibes)
     - Eventbrite (basic, kinda ugly)
@@ -36,10 +37,38 @@
     Figma prototypes:</br>
     ![alt text](image-1.png)![alt text](image-2.png)![alt text](image-3.png)![alt text](image-4.png)
 
-# Initial Setup
 
-I decided to use React + Tailwind.
+I decided to use JS/React & Tailwind CSS for the bulk of the website since it's the most common framework and very easy to use, especially in a time crunch! JS was chosen over TS because it's faster and for the scope of the project, TS is overkill (although if this was a part of a bigger project & development was to continue on it, I would have chosen TS).
 
+Additionally, I used Motion, react-icons, fontsource, and FullCalendar. Motion was non-negotiable for the mini scrolling animation I wanted, react-icons are always helpful to have on hand, fontsource for standardized font sourcing, and FullCalendar to make implementing a calendar much much easier.
+
+Fortunately, I never came across a blocking problem when developing this website. With some minor investigations and help from AI, I was able to solve *most problems. Here's some problems I came across: [Problems I Came Across](#problems-i-came-across)
+
+My favourite part of the website is definitely the calendar integration! I think it looks cute and visualization is never really a bad thing. I also learned to use a new library/technology while building it so that was super fun.
+
+## 2. 
+Given more time, I would implement a fuzzy search engine for the events. I would also optimize the performance by looking at reducing useEffects or adding memos and/or refs. I'd like to allow persistent sign-ins across reloads and reduce GraphQL fetches by caching results. Animations would also be fun to add for after signing in, loggin out, clicking on things, etc.
+
+Metrics wise, I'd want to look at render/re-render frequency, time until full loaded, input delay, and FPS when scrolling. With the implementation of cached fetches, over-fetching shouldn't be a problem but it would also be nice to see that as a metric. Lastly, it would be important to log errors and failures in development.
+
+## 3.
+Reflecting on the considerations for this project, I wanted to make sure that the code is very easily scalable and maintainable. One key way of doing this was keeping event fetching & processing purely hands-off. Given more event types in the future, the code will default to a neutral tones until manually added into a centralized location `src\utils\eventInfoProcessing.js`. Event filtering is also generated dynamically as a set from the data.
+```javascript
+const EVENT_TYPE_TONES = {
+  "workshop": "yellow",
+  "activity": "red",
+  "tech talk": "green",
+};
+```
+
+The website is fully responsive on all screen sizes (hopefully) by using custom css. [Read more here](#responsiveness)
+Here's some considerations on [accessibility](#accessibility)
+
+Lastly, documentation. Unfortunately I did not comment most lines of code. However, I tried to write, format, and organize my code & styling in a way that was readable. Most things are in chronological order based on importance of parent-child relationships. I did get AI to go in and add a few sparring lines of comments with the intent of certain code blocks.
+
+# Documented Development Process >w<
+
+## Initial Setup
 **Create standard classes for easy Tailwind**
 ```css
   --white: #FFF6EF;
@@ -77,8 +106,6 @@ I decided to use React + Tailwind.
     font-size: 1rem;
   }
 ```
-
-# Development
 
 I started by creating a basic skeleton of the site using AI, feeding it my Figma designs as a reference. I was able to get this:
 ![alt text](image-5.png)
@@ -154,6 +181,20 @@ Only the hero text really had to be resized. I split it into 3 different sizes:
 ![alt text](image-11.png)
 
 For all other text, I made them somewhat smaller to decrease clutter on smaller screens. For large screens, I added max-width to the cards. This was the only necessary change since everything was already centered.
+
+### Event Formatting
+With the addition of the calendar, the way events stack needs to be changed.
+
+1. When the screen is small enough, stack the list on top of the calendar
+2. Expand the lists to fill up the screen and center everything
+3. Remove rail on small screens
+
+## Accessibility
+After completing development, I spent some time going back to each file to make the website more accessible. Some key considerations:
+- Keyboard navigation using tab & enter
+- Alt text or aria-labels
+
+Components such as the event cards needed a lot of improvement in terms of keyboard navigation since it can't be expanded with a keyboard. For these components, I added custom keyboard navigation scripts to allow the use of tabs for switching focuses.
 
 ## Bonuses
 

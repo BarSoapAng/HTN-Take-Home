@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+﻿import { useEffect, useMemo, useRef, useState } from "react";
 import Input from "@ui/Input.jsx";
 import Button from "@ui/Button.jsx";
 
 export default function LoginModal({ open, onClose, onSubmit }) {
   const dialogRef = useRef(null);
   const firstInputRef = useRef(null);
+  const lastFocusedRef = useRef(null);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -22,12 +23,57 @@ export default function LoginModal({ open, onClose, onSubmit }) {
   useEffect(() => {
     if (!open) return;
 
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") closeModal();
+    lastFocusedRef.current = document.activeElement;
+
+    const getFocusable = () => {
+      const container = dialogRef.current;
+      if (!container) return [];
+      return Array.from(
+        container.querySelectorAll(
+          'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => !el.hasAttribute("disabled"));
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, onClose]);
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+        return;
+      }
+
+      if (e.key !== "Tab") return;
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    requestAnimationFrame(() => {
+      firstInputRef.current?.focus();
+    });
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      if (lastFocusedRef.current?.focus) {
+        lastFocusedRef.current.focus();
+      }
+    };
+  }, [open]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +94,8 @@ export default function LoginModal({ open, onClose, onSubmit }) {
       className="fixed inset-0 z-50 flex items-center justify-center px-4"
       role="dialog"
       aria-modal="true"
-      aria-label="Login"
+      aria-labelledby="login-title"
+      aria-describedby="login-description"
     >
       <button
         className="absolute inset-0 cursor-default bg-black/40"
@@ -64,8 +111,8 @@ export default function LoginModal({ open, onClose, onSubmit }) {
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="title leading-none">Log in</div>
-            <p className="small-text light-text mt-2 text-[color:var(--gray-1)]">
+            <div id="login-title" className="title leading-none">Log in</div>
+            <p id="login-description" className="small-text light-text mt-2 text-[color:var(--gray-1)]">
               Sign in to view private events for hackers :)
             </p>
           </div>
@@ -73,6 +120,8 @@ export default function LoginModal({ open, onClose, onSubmit }) {
           <button
             className="small-text light-text mx-1 hover:cursor-pointer"
             onClick={closeModal}
+            aria-label="Close login modal"
+            type="button"
           >
             ✕
           </button>
@@ -108,8 +157,6 @@ export default function LoginModal({ open, onClose, onSubmit }) {
             />
           </label>
 
-
-
           <Button
             className="mt-3"
             style={{ backgroundColor: "var(--red)" }}
@@ -123,3 +170,4 @@ export default function LoginModal({ open, onClose, onSubmit }) {
     </div>
   );
 }
+

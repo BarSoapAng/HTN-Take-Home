@@ -9,9 +9,9 @@ export default function Hero() {
     <section className="relative min-h-[100dvh]">
       <div className="relative mx-auto flex min-h-[100dvh] flex-col items-center justify-center text-center">
         <div className="grid place-items-center">
-          <h3 className="hero-text text-[color:var(--gray-1)]">Events @</h3>
-          <h1 className="hero-title text-[color:var(--red)] leading-[0.95]">
-            Hackathon Global
+          <h1 className="leading-[0.95]">
+            <span className="hero-text text-[color:var(--gray-1)] block">Events @</span>
+            <span className="hero-title text-[color:var(--red)] block">Hackathon Global</span>
           </h1>
         </div>
 

@@ -2,6 +2,8 @@ import { Fragment, useMemo } from "react";
 import EventCard from "./EventCard.jsx";
 import { formatDateLabel } from "@utils/time.js";
 
+import { MdSearchOff } from "react-icons/md";
+
 import '@componentcss/eventList.css';
 
 export default function EventList({
@@ -37,18 +39,23 @@ export default function EventList({
 
   return (
     <div className="list flex flex-col w-full">
-      {groupedEvents.map((group) => (
-        <Fragment key={group.key}>
-          <div className="title mt-5">{group.label}</div>
-          <section key={group.key} className="date-block px-3">
-            <div className="date-rail">
+      {events.length === 0 && (
+        <p className="normal-text gray-text">oops we couldn't find anything<MdSearchOff className="ml-2 inline"/></p>
+      )}
+      {groupedEvents.map((group) => {
+        const headingId = `date-${group.key}`;
+        return (
+          <Fragment key={group.key}>
+            <h2 id={headingId} className="title">{group.label}</h2>
+            <section key={group.key} className="date-block px-3" aria-labelledby={headingId}>
+            <div className="date-rail" aria-hidden="true">
               <div className="date-dot w-4 h-4" />
               <div className="date-line" />
             </div>
 
             <div className="grid gap-4">
               {group.events.map((event) => (
-                <div key={event.id} ref={(node) => setCardRef(event.id, node)}>
+                <div key={event.id} ref={(node) => setCardRef(event.id, node)} tabIndex={-1}>
                   <EventCard
                     event={event}
                     onScrollTo={onScrollTo}
@@ -64,7 +71,8 @@ export default function EventList({
             </div>
           </section>
         </Fragment>
-      ))}
+      );
+      })}
     </div>
   );
 }

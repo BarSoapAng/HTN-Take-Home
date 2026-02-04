@@ -4,7 +4,7 @@
 @import '@fontsource/patrick-hand';
 
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
 
   font-weight: 400;
   font-style: normal;
@@ -24,7 +24,23 @@
   --green: #87EEAE;
 
   color: var(--black);
+}
 
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 9999;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: var(--white);
+  color: var(--black);
+  border: 2px solid var(--black);
+}
+
+.skip-link:focus {
+  left: 0.75rem;
+  top: 0.75rem;
 }
 
 .black-text {
