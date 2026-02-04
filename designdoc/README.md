@@ -97,3 +97,11 @@ Some things I also wanted to optimize were:
 
 Putting it all together:
 ![alt text](image-7.png)
+
+## Login Page
+
+I started by hardcoding the login credentials and used a "useAuth" hook to validate login status. It started off by being really simple comparison: "does the username & password matching hardcoded values?" The login was a simple button at top right, where it pops up a window on click.
+
+![alt text](image-8.png)
+
+I also added error checking & disabled the button if the input is not filled.

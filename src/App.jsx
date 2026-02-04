@@ -7,7 +7,7 @@ import Hero from "./components/Hero.jsx";
 import EventList from "./components/EventList";
 import LoginModal from "./components/LoginModal.jsx";
 import LoadingState from "./components/LoadingState.jsx";
-import Footer from "./components/Footer.jsx";
+import Footer from "./components/footer.jsx";
 
 export default function App() {
   const auth = useAuth();

@@ -1,6 +1,7 @@
 import { FaLaptopCode } from "react-icons/fa";
 
 import { useState, useEffect, useRef } from "react";
+import Button from "./ui/Button.jsx";
 
 export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -39,13 +40,13 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
   return (
     <>
     <header
-      className={`fixed top-0 left-0 z-40 w-full transition-transform duration-200 ${
+      className={`fixed top-0 left-0 z-40 w-full transition-transform duration-200  ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div
-        className="flex justify-between px-20 py-1"
-        style={{ backgroundColor: "var(--white)", borderBottom: "1px solid var(--blue)" }}
+        className="flex justify-between px-20 py-1 background-blur shadow-sm"
+        style={{ backgroundColor: "var(--white)" }}
       >
         <a href="/" onClick={ handleLogoClick } className="flex items-center gap-5">
           <FaLaptopCode className="w-6 h-6"/>
@@ -54,21 +55,21 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
 
         <div className="flex items-center gap-2">
           {isLoggedIn ? (
-            <button
-              className="small-text rounded-xl border border-black/20 px-4 py-2 transition hover:translate-y-[-1px] hover:shadow-sm"
+            <Button
+              className="border border-black/20 px-4 py-2"
               style={{ backgroundColor: "var(--green)" }}
               onClick={onLogoutClick}
             >
               Log out
-            </button>
+            </Button>
           ) : (
-            <button
-              className="small-text rounded-xl border border-black/20 px-4 py-2 transition hover:translate-y-[-1px] hover:shadow-sm"
+            <Button
+              className="border border-black/20 px-4 py-2"
               style={{ backgroundColor: "var(--blue)" }}
               onClick={onLoginClick}
             >
               Log in
-            </button>
+            </Button>
           )}
         </div>
       </div>
@@ -76,4 +77,3 @@ export default function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
     </>
   );
 };
-
