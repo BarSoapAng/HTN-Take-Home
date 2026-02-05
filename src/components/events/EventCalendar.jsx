@@ -206,7 +206,7 @@ export default function EventCalendar({ events, onScrollTo }) {
       {hoverInfo?.event && (
         <div
           ref={previewRef}
-          className="fixed z-50 max-w-55 rounded-lg border border-[var(--gray-2)] bg-white shadow-md px-3 py-2"
+          className="fixed z-50 max-w-xs rounded-lg border border-[var(--gray-2)] bg-white shadow-md px-3 py-2"
           style={{
             left: Math.min(hoverInfo.x + 12, window.innerWidth - 340), // To make sure card hover doesn't go off screen
             top: Math.min(hoverInfo.y + 5, window.innerHeight - 130),
