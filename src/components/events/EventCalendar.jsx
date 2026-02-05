@@ -206,9 +206,9 @@ export default function EventCalendar({ events, onScrollTo }) {
       {hoverInfo?.event && (
         <div
           ref={previewRef}
-          className="fixed z-50 max-w-xs rounded-xl border border-black/10 bg-white shadow-lg p-3"
+          className="fixed z-50 max-w-55 rounded-lg border border-[var(--gray-2)] bg-white shadow-md px-3 py-2"
           style={{
-            left: Math.min(hoverInfo.x + 12, window.innerWidth - 340),
+            left: Math.min(hoverInfo.x + 12, window.innerWidth - 340), // To make sure card hover doesn't go off screen
             top: Math.min(hoverInfo.y + 5, window.innerHeight - 130),
           }}
           onMouseEnter={() => {
@@ -219,11 +219,11 @@ export default function EventCalendar({ events, onScrollTo }) {
             setHoverInfo(null);
           }}
         >
-          <div className="normal-text leading-tight">{hoverInfo.event.name}</div>
-          <div className="small-text gray-text mt-1">
+          <div className="normal-text">{hoverInfo.event.name}</div>
+          <div className="small-text gray-text">
             {formatTimeRange(hoverInfo.event.start_time, hoverInfo.event.end_time)}
           </div>
-          <div className="small-text light-text mt-1">
+          <div className="small-text light-text">
             {formatName(hoverInfo.event.event_type)}
           </div>
         </div>
