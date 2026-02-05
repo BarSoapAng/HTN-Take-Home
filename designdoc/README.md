@@ -29,12 +29,13 @@
     - Bonus: bubbly color animation on hover
 4. Design!
 
-    Initial sketches:</br>
+    **Initial sketches:**</br>
+    ![alt text](pictures/image-20.png)
 
     **Styles:**</br>
     ![alt text](pictures/image.png)
 
-    Figma prototypes:</br>
+    **Figma prototypes:**</br>
     ![alt text](pictures/image-1.png)![alt text](pictures/image-2.png)![alt text](pictures/image-3.png)![alt text](pictures/image-4.png)
 
 
