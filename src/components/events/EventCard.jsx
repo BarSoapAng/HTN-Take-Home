@@ -158,7 +158,7 @@ export default function EventCard({ event, onScrollTo, relatedEvents, forceExpan
         )}
       </div>
 
-      <div className='flex flex-col gap-2 items-start'>
+      <div className='flex flex-col gap-2 items-start mt-4'>
         <p className='small-text underline'>Add to Calendar:</p>
         <div className='flex flex-row gap-3'>
           <Button
