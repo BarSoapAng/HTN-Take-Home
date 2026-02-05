@@ -127,52 +127,8 @@ export default function EventCalendar({ events, onScrollTo }) {
           eventDidMount={(info) => {
             const tone = info.event.extendedProps?.tone;
             const bg = toneToCssVar(tone);
-            const raw = info.event.extendedProps?.raw;
 
             info.el.style.background = bg;
-            info.el.setAttribute("tabindex", "0");
-            info.el.setAttribute("role", "button");
-
-            if (raw) {
-              const ariaLabel = `${raw.name ?? "Event"}. ${formatTimeRange(raw.start_time, raw.end_time)}. ${formatName(raw.event_type)}.`;
-              info.el.setAttribute("aria-label", ariaLabel);
-            }
-
-            const handleKeyDown = (event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                if (!raw) return;
-                onScrollTo?.(raw.id, raw.id);
-              }
-            };
-
-            const handleFocus = () => {
-              if (!raw) return;
-              const rect = info.el.getBoundingClientRect();
-              setHoverInfo({
-                x: rect.right,
-                y: rect.top,
-                event: raw,
-              });
-            };
-
-            const handleBlur = () => {
-              if (!isPreviewHover) setHoverInfo(null);
-            };
-
-            info.el.addEventListener("keydown", handleKeyDown);
-            info.el.addEventListener("focus", handleFocus);
-            info.el.addEventListener("blur", handleBlur);
-
-            info.el.__keyDown = handleKeyDown;
-            info.el.__focus = handleFocus;
-            info.el.__blur = handleBlur;
-          }}
-          eventWillUnmount={(info) => {
-            const el = info.el;
-            if (el?.__keyDown) el.removeEventListener("keydown", el.__keyDown);
-            if (el?.__focus) el.removeEventListener("focus", el.__focus);
-            if (el?.__blur) el.removeEventListener("blur", el.__blur);
           }}
           eventMouseEnter={(mouseEnterInfo) => {
             if (!canHover) return;
